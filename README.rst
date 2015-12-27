@@ -46,8 +46,10 @@ stock Lua:
    possible to set it to a letter or number, this is not recommended as
    it may interfere with other aspects of pattern matching, and doing so
    may be disallowed in the future.
--  **NOTE:** Because ``set_escape_char`` modifies global state, it is
-   **not** thread-safe.
+
+   -  **NOTE:** Because ``set_escape_char`` modifies global state, it is
+      **not** thread-safe.
+
 -  Unlike Lua, which has no notion of a Unicode string and assumes all
    characters are one byte in length, this library operates on full
    Unicode strings (i.e. ``str`` objects). If you pass bytes objects to
