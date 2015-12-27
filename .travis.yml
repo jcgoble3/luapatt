@@ -5,25 +5,28 @@ branches:
   - develop
   - master
 language: python
-python:
-- '3.5'
-- 3.5-dev
-- nightly
 matrix:
-  allow_failures:
+  include:
+  - python: '3.5'
+    env: SUPPORTED=yes
   - python: 3.5-dev
+    env: SUPPORTED=no
   - python: nightly
+    env: SUPPORTED=no
+  allow_failures:
+  - env: SUPPORTED=no
 install:
-- if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then sudo pip install flake8; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then sudo pip3.5 install flake8; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then sudo pip3.4 install flake8; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then sudo pip3.3 install flake8; fi
+- pip install flake8
 script:
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then flake8 src; fi
-- if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then python -m pytest; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then python3.5 -m pytest; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.4 -m pytest; fi
-- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.3 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then flake8 src; fi
+- if [[ $SUPPORTED = yes ]]; then python3.5 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then sudo python3.5 setup.py install && python3.5 -c 'import luapatt; print("successfully imported")'; fi
+- if [[ $SUPPORTED = yes ]]; then python3.4 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then sudo python3.4 setup.py install && python3.4 -c 'import luapatt; print("successfully imported")'; fi
+- if [[ $SUPPORTED = yes ]]; then python3.3 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then sudo python3.3 setup.py install && python3.3 -c 'import luapatt; print("successfully imported")'; fi
+- if [[ $SUPPORTED = no ]]; then python -m pytest; fi
+- if [[ $SUPPORTED = no ]]; then sudo python setup.py install && python -c 'import luapatt; print("successfully imported")'; fi
 deploy:
   provider: pypi
   user: jcgoble3
