@@ -9,7 +9,8 @@ matrix:
   - python: nightly
     env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.6/site-packages/
   allow_failures:
-  - env: SUPPORTED=no
+  - python: 3.5-dev
+  - python: nightly
 install:
 - if [[ $SUPPORTED = yes ]]; then pip install flake8; fi
 - if [[ $SUPPORTED = yes ]]; then pip3.4 install --user pytest; fi
