@@ -1,0 +1,12 @@
+# Python bytecode
+__pycache__/
+
+# py.test junk
+.cache/
+.coverage
+htmlcov/
+
+# setuptools artifacts
+build/
+dist/
+*.egg-info/

@@ -1,0 +1,35 @@
+branches:
+    only:
+        - develop
+        - master
+
+language: python
+
+python:
+    - "3.5"
+    - "3.5-dev" # 3.5 development branch
+    - "nightly" # currently points to 3.6-dev
+
+matrix:
+    allow_failures:
+        - python: "3.5-dev"
+        - python: "nightly"
+
+install:
+    - pip install flake8
+
+script:
+    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then flake8 luapatt; fi
+    - if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then python -m pytest; fi
+    - if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then python3.5 -m pytest; fi
+    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.4 -m pytest; fi
+    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.3 -m pytest; fi
+
+deploy:
+    provider: pypi
+    user: jcgoble3
+    on:
+        branch: master
+        tags: true
+        python: "3.5"
+    distributions: sdist bdist_wheel
