@@ -1,38 +1,34 @@
 branches:
-    only:
-        - develop
-        - master
-
+  only:
+  - develop
+  - master
 language: python
-
 python:
-    - "3.5"
-    - "3.5-dev" # 3.5 development branch
-    - "nightly" # currently points to 3.6-dev
-
+- '3.5'
+- 3.5-dev
+- nightly
 matrix:
-    allow_failures:
-        - python: "3.5-dev"
-        - python: "nightly"
-
+  allow_failures:
+  - python: 3.5-dev
+  - python: nightly
 install:
-    - if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then pip install flake8; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then pip3.5 install flake8; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then pip3.4 install flake8; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then pip3.3 install flake8; fi
-
+- if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then pip install flake8; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then pip3.5 install flake8; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then pip3.4 install flake8; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then pip3.3 install flake8; fi
 script:
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then flake8 src; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then python -m pytest; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then python3.5 -m pytest; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.4 -m pytest; fi
-    - if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.3 -m pytest; fi
-
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then flake8 src; fi
+- if [[ $TRAVIS_PYTHON_VERSION = nightly ]]; then python -m pytest; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5* ]]; then python3.5 -m pytest; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.4 -m pytest; fi
+- if [[ $TRAVIS_PYTHON_VERSION = 3.5 ]]; then python3.3 -m pytest; fi
 deploy:
-    provider: pypi
-    user: jcgoble3
-    on:
-        branch: master
-        tags: true
-        python: "3.5"
-    distributions: sdist bdist_wheel
+  provider: pypi
+  user: jcgoble3
+  on:
+    branch: master
+    tags: true
+    python: '3.5'
+  distributions: sdist bdist_wheel
+  password:
+    secure: bAbdGQ8lq0GZM5o58e7Rdzvj+1B1CbkbkpkSpifAkl2RkRHqA7N7FWjlQtklc85ciDqUdjBDiU0T61dXlAdX5barlztQsrAw8eClyrqL3M0XN6rGoeNJVt0apT8XBaOKFhwv1Efw+ILz4ImIjCa5xwkg//FMB8GPe/2ilu+81tu2i5CxAs1cbnmK6ZHLgX/CCnAfltNCF6Vyh29VBiEqQ2Jvhh16FGDiuPpDM+l9z9Par58fdMytm6sj4Qn1QPMD48ctBpdfxCepWqg2sRtz5dECtZcO2RoL6WAtb144OBMa4GBrQcpRbIke1aTBLc78RMspM6JtrzBcmh43zEjhyC/4hX8bEscXLlX28+/7EhrAvTZBynOLUTOKc//8UNAR85uHq3/d8+pJ5F8Wh9H2PKS/n56AzrrD1pgcWfsQ61DZvupkHphPS1NGUrFLpx/gKDW7zfS9azVECBZ/Tc2LhUeNjQFSsHB7YYOYl8kC9LYxpf4cGwYRK+rVBTj4xuiDAw0JuX7w1NSCGGlu2oWZPa/7xCKYV/IRr7iGqFe4XK08zcpUxHbeTXeIyLAqm9bRy1mH5d8aSoxOTXJaoHVSJhSjVikEnzX1I2+xY2t8vn2EyVrfeSDbHfI+8cRXe3FUBdkG/4B1IlmuU3ypNdniIoVYlT3UlD6s3UcBN08E6oA=
