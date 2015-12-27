@@ -62,5 +62,3 @@ As with Lua itself, this library is released under the MIT License.
 .. _Lua reference manual: http://www.lua.org/manual/5.3/manual.html#6.4.1
 .. |travis-develop| image:: https://travis-ci.org/jcgoble3/luapatt.svg?branch=develop
    :target: https://travis-ci.org/jcgoble3/luapatt
-.. |travis-master| image:: https://travis-ci.org/jcgoble3/luapatt.svg?branch=master
-   :target: https://travis-ci.org/jcgoble3/luapatt
