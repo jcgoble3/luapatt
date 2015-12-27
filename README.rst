@@ -1,5 +1,5 @@
-luapatt
-=======
+luapatt |travis-develop|
+========================
 
 A Python 3.3+ implementation of the `Lua language’s`_ pattern matching
 functions. Lua’s pattern matching is simpler than regular expressions
@@ -60,3 +60,7 @@ As with Lua itself, this library is released under the MIT License.
 
 .. _Lua language’s: http://www.lua.org/home.html
 .. _Lua reference manual: http://www.lua.org/manual/5.3/manual.html#6.4.1
+.. |travis-develop| image:: https://travis-ci.org/jcgoble3/luapatt.svg?branch=develop
+   :target: https://travis-ci.org/jcgoble3/luapatt
+.. |travis-master| image:: https://travis-ci.org/jcgoble3/luapatt.svg?branch=master
+   :target: https://travis-ci.org/jcgoble3/luapatt
