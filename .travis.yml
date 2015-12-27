@@ -9,9 +9,9 @@ matrix:
   - python: '3.5'
     env: SUPPORTED=yes
   - python: 3.5-dev
-    env: SUPPORTED=no
+    env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.5/site-packages/
   - python: nightly
-    env: SUPPORTED=no
+    env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.6/site-packages/
   allow_failures:
   - env: SUPPORTED=no
 install:
@@ -21,10 +21,13 @@ install:
 script:
 - if [[ $SUPPORTED = yes ]]; then flake8 src; fi
 - if [[ $SUPPORTED = yes ]]; then python3.5 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.5/site-packages/"; fi
 - if [[ $SUPPORTED = yes ]]; then python3.5 setup.py install --user && python3.5 -c 'import luapatt; print("successfully imported")'; fi
 - if [[ $SUPPORTED = yes ]]; then python3.4 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.4/site-packages/"; fi
 - if [[ $SUPPORTED = yes ]]; then python3.4 setup.py install --user && python3.4 -c 'import luapatt; print("successfully imported")'; fi
 - if [[ $SUPPORTED = yes ]]; then python3.3 -m pytest; fi
+- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.3/site-packages/"; fi
 - if [[ $SUPPORTED = yes ]]; then python3.3 setup.py install --user && python3.3 -c 'import luapatt; print("successfully imported")'; fi
 - if [[ $SUPPORTED = no ]]; then python -m pytest; fi
 - if [[ $SUPPORTED = no ]]; then python setup.py install --user && python -c 'import luapatt; print("successfully imported")'; fi
