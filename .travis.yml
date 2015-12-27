@@ -35,7 +35,6 @@ deploy:
   provider: pypi
   user: jcgoble3
   on:
-    branch: master
     tags: true
     python: '3.5'
   distributions: sdist bdist_wheel
