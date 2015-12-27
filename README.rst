@@ -11,9 +11,7 @@ balanced pair of parentheses (or any two other characters).
 Installation
 ------------
 
-``pip install -i https://testpypi.python.org/pypi luapatt``
-
-Upload to the regular PyPI will come “soon”.
+``pip install luapatt``
 
 Documentation
 -------------
@@ -58,8 +56,7 @@ stock Lua:
 Licensing
 ---------
 
-As with Lua itself, this library is released under the MIT License. See
-the ``LICENSE`` file for more details.
+As with Lua itself, this library is released under the MIT License.
 
 .. _Lua language’s: http://www.lua.org/home.html
 .. _Lua reference manual: http://www.lua.org/manual/5.3/manual.html#6.4.1
