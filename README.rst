@@ -59,8 +59,7 @@ Licensing
 ---------
 
 As with Lua itself, this library is released under the MIT License. See
-the ```LICENSE`` file`_ for more details.
+the ``LICENSE`` file for more details.
 
 .. _Lua language’s: http://www.lua.org/home.html
 .. _Lua reference manual: http://www.lua.org/manual/5.3/manual.html#6.4.1
-.. _``LICENSE`` file: ./LICENSE
