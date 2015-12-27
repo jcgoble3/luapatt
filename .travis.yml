@@ -1,4 +1,4 @@
-sudo: required
+sudo: required  # necessary because the pip and setup.py installs on py3.4/py3.3 don't work on the container-based infrastructure
 branches:
   only:
   - develop
