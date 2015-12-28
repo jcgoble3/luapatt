@@ -20,7 +20,7 @@
 
 from array import array
 
-__version__ = '0.9.0b2'
+__version__ = '0.9.0b4'
 
 _ARRAYTYPECODES = {}
 for code in 'bhilq':

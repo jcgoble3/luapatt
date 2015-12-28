@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='luapatt',
-    version='0.9.0b2',
+    version='0.9.0b4',
     description='Python implementation of Lua-style pattern matching',
     long_description=long_description,
     url='https://github.com/jcgoble3/luapatt',
