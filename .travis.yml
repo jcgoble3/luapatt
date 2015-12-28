@@ -1,49 +1,52 @@
-sudo: required
+sudo: required  # necessary because the pip and setup.py installs on py3.4/py3.3 don't work on the container-based infrastructure
+
 language: python
+
 matrix:
-  include:
-  - python: '3.5'
-    env: SUPPORTED=yes
-  - python: 3.5-dev
-    env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.5/site-packages/
-  - python: nightly
-    env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.6/site-packages/
-  allow_failures:
-  - python: 3.5-dev
-  - python: nightly
+    include:
+      - python: '3.5'
+        env: SUPPORTED=yes
+      - python: 3.5-dev
+        env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.5/site-packages/
+      - python: nightly
+        env: SUPPORTED=no PYTHONPATH=$HOME/.local/lib/python3.6/site-packages/
+    allow_failures:
+      - python: 3.5-dev
+      - python: nightly
+
 install:
-- if [[ $SUPPORTED = yes ]]; then pip install flake8; fi
-- if [[ $SUPPORTED = yes ]]; then pip3.4 install --user pytest; fi
-- if [[ $SUPPORTED = yes ]]; then pip3.3 install --user pytest; fi
+  - if [[ $SUPPORTED = yes ]]; then pip install flake8; fi
+  - if [[ $SUPPORTED = yes ]]; then pip3.4 install --user pytest; fi
+  - if [[ $SUPPORTED = yes ]]; then pip3.3 install --user pytest; fi
+
 script:
-- if [[ $SUPPORTED = yes ]]; then flake8 src; fi
-- if [[ $SUPPORTED = yes ]]; then python3.5 -m pytest; fi
-- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.5/site-packages/";
-  fi
-- if [[ $SUPPORTED = yes ]]; then python3.5 setup.py install --user && python3.5 -c
-  'import luapatt; print("successfully imported")'; fi
-- if [[ $SUPPORTED = yes ]]; then python3.4 -m pytest; fi
-- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.4/site-packages/";
-  fi
-- if [[ $SUPPORTED = yes ]]; then python3.4 setup.py install --user && python3.4 -c
-  'import luapatt; print("successfully imported")'; fi
-- if [[ $SUPPORTED = yes ]]; then python3.3 -m pytest; fi
-- if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.3/site-packages/";
-  fi
-- if [[ $SUPPORTED = yes ]]; then python3.3 setup.py install --user && python3.3 -c
-  'import luapatt; print("successfully imported")'; fi
-- if [[ $SUPPORTED = no ]]; then python -m pytest; fi
-- if [[ $SUPPORTED = no ]]; then python setup.py install --user && python -c 'import
-  luapatt; print("successfully imported")'; fi
+  - if [[ $SUPPORTED = yes ]]; then flake8 src; fi
+
+  - if [[ $SUPPORTED = yes ]]; then python3.5 -m pytest; fi
+  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.5/site-packages/"; fi
+  - if [[ $SUPPORTED = yes ]]; then python3.5 setup.py install --user && python3.5 -c 'import luapatt; print("Successfully imported!")'; fi
+
+  - if [[ $SUPPORTED = yes ]]; then python3.4 -m pytest; fi
+  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.4/site-packages/"; fi
+  - if [[ $SUPPORTED = yes ]]; then python3.4 setup.py install --user && python3.4 -c 'import luapatt; print("Successfully imported!")'; fi
+
+  - if [[ $SUPPORTED = yes ]]; then python3.3 -m pytest; fi
+  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.3/site-packages/"; fi
+  - if [[ $SUPPORTED = yes ]]; then python3.3 setup.py install --user && python3.3 -c 'import luapatt; print("Successfully imported!")'; fi
+
+  - if [[ $SUPPORTED = no ]]; then python -m pytest; fi
+  - if [[ $SUPPORTED = no ]]; then python setup.py install --user && python -c 'import luapatt; print("Successfully imported!")'; fi
+
 notifications:
-  email:
-    on_success: always
+    email:
+        on_success: always
+
 deploy:
-  provider: pypi
-  user: jcgoble3
-  on:
-    tags: true
-    python: '3.5'
-  distributions: sdist bdist_wheel
-  password:
-    secure: ioGko86/sXPaUhg011LSP3UAKdEMJ3tryVMYO09RzHNXVa36iwzRwvZ9L2uOycXvTJuJGyII6tVSQfMXcNImNMpAkhM27rfFtR0PRn+yuahlO7Cl9DL4eYB1ggwKWZH/ORGu0fQOKxtqEEom9k1o0Ylu9DcJ6JhCNQwW6NtVgB6UCQDQENCoeHegiv1E3hfr+I4fqZ0q89wcSPZ/W24yosgqQx28tmfdudQ4M2UddZsZd4BQFfmhuTBzovAOjgG1VPVSKxS1y14f2wvdfZmjLFNZFmoa4+fTCsCDTDZgcwuVVzhQMBdAa83/rOFECooQI++SnuqFT7CTLKh3mFOJzL0KDorQiKXyQiA7Y59gXmTZVNaguHbJvo+rjmkMd4SJALmFAOHa6kj1tT3hjjHbgt2uSzZtAN59a9Xoijs28EysYn5w155xdtGnluxxC0gvilj6W7vHbzaSnLG9OGVDg/gAXS1KOcseDVY27kxjZZ8oUfEZRsNy95ESBrms2rGyFSVrUn9jnHIHV+KXWy9TprYLaKQw9AtXmCiS8Qu5bTW/JtKYVYi5seUFnDaz1skfR/aYJdiCx/q7wfT4D0Zj58fRLi7ItsdY2TT8WNyNGH9nIZlb0NvZVEd8Y7FpHhEIDA66uXKpADbx3faBZwVgmfdO3YVrzvFkDsy08uu80oA=
+    provider: pypi
+    on:
+        tags: true
+        python: '3.5'
+    distributions: sdist bdist_wheel
+    user: jcgoble3
+    password:
+        secure: ioGko86/sXPaUhg011LSP3UAKdEMJ3tryVMYO09RzHNXVa36iwzRwvZ9L2uOycXvTJuJGyII6tVSQfMXcNImNMpAkhM27rfFtR0PRn+yuahlO7Cl9DL4eYB1ggwKWZH/ORGu0fQOKxtqEEom9k1o0Ylu9DcJ6JhCNQwW6NtVgB6UCQDQENCoeHegiv1E3hfr+I4fqZ0q89wcSPZ/W24yosgqQx28tmfdudQ4M2UddZsZd4BQFfmhuTBzovAOjgG1VPVSKxS1y14f2wvdfZmjLFNZFmoa4+fTCsCDTDZgcwuVVzhQMBdAa83/rOFECooQI++SnuqFT7CTLKh3mFOJzL0KDorQiKXyQiA7Y59gXmTZVNaguHbJvo+rjmkMd4SJALmFAOHa6kj1tT3hjjHbgt2uSzZtAN59a9Xoijs28EysYn5w155xdtGnluxxC0gvilj6W7vHbzaSnLG9OGVDg/gAXS1KOcseDVY27kxjZZ8oUfEZRsNy95ESBrms2rGyFSVrUn9jnHIHV+KXWy9TprYLaKQw9AtXmCiS8Qu5bTW/JtKYVYi5seUFnDaz1skfR/aYJdiCx/q7wfT4D0Zj58fRLi7ItsdY2TT8WNyNGH9nIZlb0NvZVEd8Y7FpHhEIDA66uXKpADbx3faBZwVgmfdO3YVrzvFkDsy08uu80oA=
