@@ -2,6 +2,11 @@ sudo: required  # necessary because the pip and setup.py installs on py3.4/py3.3
 
 language: python
 
+branches:
+    only:
+      - develop
+      - master
+
 matrix:
     include:
       - python: '3.5'
@@ -14,28 +19,38 @@ matrix:
       - python: 3.5-dev
       - python: nightly
 
+before_install:
+  - |
+    if [[ $TRAVIS_BRANCH = master ]]; then
+        export TYPE=deployment
+    elif [[ $SUPPORTED = yes ]]; then
+        export TYPE=main
+    else
+        export TYPE=experimental
+    fi
+
 install:
-  - if [[ $SUPPORTED = yes ]]; then pip install flake8; fi
-  - if [[ $SUPPORTED = yes ]]; then pip3.4 install --user pytest; fi
-  - if [[ $SUPPORTED = yes ]]; then pip3.3 install --user pytest; fi
+  - if [[ $TYPE = main ]]; then pip install flake8; fi
+  - if [[ $TYPE = main ]]; then pip3.4 install --user pytest; fi
+  - if [[ $TYPE = main ]]; then pip3.3 install --user pytest; fi
 
 script:
-  - if [[ $SUPPORTED = yes ]]; then flake8 src; fi
+  - if [[ $TYPE = main ]]; then flake8 src; fi
 
-  - if [[ $SUPPORTED = yes ]]; then python3.5 -m pytest; fi
-  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.5/site-packages/"; fi
-  - if [[ $SUPPORTED = yes ]]; then python3.5 setup.py install --user && python3.5 -c 'import luapatt; print("Successfully imported!")'; fi
+  - if [[ $TYPE = main ]]; then python3.5 -m pytest; fi
+  - if [[ $TYPE = main ]]; then export PYTHONPATH="$HOME/.local/lib/python3.5/site-packages/"; fi
+  - if [[ $TYPE = main ]]; then python3.5 setup.py install --user && python3.5 -c 'import luapatt; print("Successfully imported!")'; fi
 
-  - if [[ $SUPPORTED = yes ]]; then python3.4 -m pytest; fi
-  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.4/site-packages/"; fi
-  - if [[ $SUPPORTED = yes ]]; then python3.4 setup.py install --user && python3.4 -c 'import luapatt; print("Successfully imported!")'; fi
+  - if [[ $TYPE = main ]]; then python3.4 -m pytest; fi
+  - if [[ $TYPE = main ]]; then export PYTHONPATH="$HOME/.local/lib/python3.4/site-packages/"; fi
+  - if [[ $TYPE = main ]]; then python3.4 setup.py install --user && python3.4 -c 'import luapatt; print("Successfully imported!")'; fi
 
-  - if [[ $SUPPORTED = yes ]]; then python3.3 -m pytest; fi
-  - if [[ $SUPPORTED = yes ]]; then export PYTHONPATH="$HOME/.local/lib/python3.3/site-packages/"; fi
-  - if [[ $SUPPORTED = yes ]]; then python3.3 setup.py install --user && python3.3 -c 'import luapatt; print("Successfully imported!")'; fi
+  - if [[ $TYPE = main ]]; then python3.3 -m pytest; fi
+  - if [[ $TYPE = main ]]; then export PYTHONPATH="$HOME/.local/lib/python3.3/site-packages/"; fi
+  - if [[ $TYPE = main ]]; then python3.3 setup.py install --user && python3.3 -c 'import luapatt; print("Successfully imported!")'; fi
 
-  - if [[ $SUPPORTED = no ]]; then python -m pytest; fi
-  - if [[ $SUPPORTED = no ]]; then python setup.py install --user && python -c 'import luapatt; print("Successfully imported!")'; fi
+  - if [[ $TYPE = experimental ]]; then python -m pytest; fi
+  - if [[ $TYPE = experimental ]]; then python setup.py install --user && python -c 'import luapatt; print("Successfully imported!")'; fi
 
 notifications:
     email:
@@ -44,7 +59,7 @@ notifications:
 deploy:
     provider: pypi
     on:
-        tags: true
+        condition: $TYPE = deployment
         python: '3.5'
     distributions: sdist bdist_wheel
     user: jcgoble3
