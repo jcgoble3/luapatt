@@ -35,6 +35,8 @@ script:
 - if [[ $SUPPORTED = no ]]; then python -m pytest; fi
 - if [[ $SUPPORTED = no ]]; then python setup.py install --user && python -c 'import
   luapatt; print("successfully imported")'; fi
+email:
+  on_success: always
 deploy:
   provider: pypi
   user: jcgoble3
