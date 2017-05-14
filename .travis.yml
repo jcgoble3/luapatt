@@ -8,6 +8,11 @@ branches:
       - develop
       - master
 
+matrix:
+    allowed_failures:
+        - env: TOXENV=py37-tests
+    fast_finish: true
+
 jobs:
     include:
         - stage: test
@@ -37,6 +42,12 @@ jobs:
         - stage: test
           python: 3.6
           env: TOXENV=linting
+          install: pip install tox
+          script: tox
+
+        - stage: test
+          python: 3.7-dev
+          env: TOXENV=py37-tests
           install: pip install tox
           script: tox
 
