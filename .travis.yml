@@ -27,6 +27,9 @@ script: tox
 #    fast_finish: true
 
 jobs:
+    allow_failures:
+        - python: 3.7-dev
+    fast_finish: true
     include:
         - stage: test
           python: 3.6
