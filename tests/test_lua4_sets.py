@@ -40,7 +40,6 @@ class TestSets:
     @classmethod
     def setup_class(cls):
         cls.abc = ''.join(map(chr, range(256)))
-        assert len(cls.abc) == sys.maxunicode + 1
 
     def strset(self, p):
         result = set()
