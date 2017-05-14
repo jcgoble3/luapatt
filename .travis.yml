@@ -23,15 +23,12 @@ matrix:
     allowed_failures:
         - python: 3.7-dev
     fast_finish: true
+    include:
+        - python: 3.6
+          env: TOXENV=linting
 
 jobs:
     include:
-        - stage: test
-          python: 3.6
-          env: TOXENV=linting
-          install: pip install tox
-          script: tox
-
         - stage: deploy
           install: skip
           script: skip
