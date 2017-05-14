@@ -19,10 +19,10 @@ install: pip install tox-travis
 
 script: tox
 
-#matrix:
-#    allow_failures:
-#        - python: 3.7-dev
-#    fast_finish: true
+matrix:
+    allow_failures:
+        - python: 3.7-dev
+    fast_finish: true
 
 jobs:
     include:
