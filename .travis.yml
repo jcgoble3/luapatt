@@ -22,7 +22,7 @@ script: tox
 matrix:
     allow_failures:
         - python: 3.7-dev
-    fast_finish: true
+#    fast_finish: true
 
 jobs:
     include:
