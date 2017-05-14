@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# Copyright 2015 Jonathan Goble
+# Copyright 2015, 2017 Jonathan Goble
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the "Software"),
@@ -33,10 +33,13 @@ import luapatt
 ### This class takes several minutes to run, so be patient. test_percent_z and
 ### test_dot are responsible for two-thirds of that time.
 
+### Update 5/14/2017: changing tests from full range of Unicode to 8 bits,
+### because Travis CI testing is taking almost three times as long now.
+
 class TestSets:
     @classmethod
     def setup_class(cls):
-        cls.abc = ''.join(map(chr, range(sys.maxunicode + 1)))
+        cls.abc = ''.join(map(chr, range(256)))
         assert len(cls.abc) == sys.maxunicode + 1
 
     def strset(self, p):
