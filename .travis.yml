@@ -1,53 +1,34 @@
 dist: trusty
 sudo: false
 
-language: python
-
 branches:
     only:
       - develop
       - master
 
+language: python
+
+python:
+    - 3.3
+    - 3.4
+    - 3.5
+    - 3.6
+    - 3.7-dev
+
+install: pip install tox-travis
+
+script: tox
+
 matrix:
     allowed_failures:
-        - env: TOXENV=py37-tests
+        - python: 3.7-dev
     fast_finish: true
 
 jobs:
     include:
         - stage: test
-          python: 3.3
-          env: TOXENV=py33-tests
-          install: pip install tox
-          script: tox
-
-        - stage: test
-          python: 3.4
-          env: TOXENV=py34-tests
-          install: pip install tox
-          script: tox
-
-        - stage: test
-          python: 3.5
-          env: TOXENV=py35-tests
-          install: pip install tox
-          script: tox
-
-        - stage: test
-          python: 3.6
-          env: TOXENV=py36-tests
-          install: pip install tox
-          script: tox
-
-        - stage: test
           python: 3.6
           env: TOXENV=linting
-          install: pip install tox
-          script: tox
-
-        - stage: test
-          python: 3.7-dev
-          env: TOXENV=py37-tests
           install: pip install tox
           script: tox
 
