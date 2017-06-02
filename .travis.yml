@@ -27,10 +27,6 @@ script: tox
 #    fast_finish: true
 
 jobs:
-    matrix:
-        allow_failures:
-            - python: 3.7-dev
-        fast_finish: true
     include:
         - stage: test
           python: 3.6
@@ -47,4 +43,4 @@ jobs:
               distributions: sdist bdist_wheel
               user: jcgoble3
               password:
-                  secure: ioGko86/sXPaUhg011LSP3UAKdEMJ3tryVMYO09RzHNXVa36iwzRwvZ9L2uOycXvTJuJGyII6tVSQfMXcNImNMpAkhM27rfFtR0PRn+yuahlO7Cl9DL4eYB1ggwKWZH/ORGu0fQOKxtqEEom9k1o0Ylu9DcJ6JhCNQwW6NtVgB6UCQDQENCoeHegiv1E3hfr+I4fqZ0q89wcSPZ/W24yosgqQx28tmfdudQ4M2UddZsZd4BQFfmhuTBzovAOjgG1VPVSKxS1y14f2wvdfZmjLFNZFmoa4+fTCsCDTDZgcwuVVzhQMBdAa83/rOFECooQI++SnuqFT7CTLKh3mFOJzL0KDorQiKXyQiA7Y59gXmTZVNaguHbJvo+rjmkMd4SJALmFAOHa6kj1tT3hjjHbgt2uSzZtAN59a9Xoijs28EysYn5w155xdtGnluxxC0gvilj6W7vHbzaSnLG9OGVDg/gAXS1KOcseDVY27kxjZZ8oUfEZRsNy95ESBrms2rGyFSVrUn9jnHIHV+KXWy9TprYLaKQw9AtXmCiS8Qu5bTW/JtKYVYi5seUFnDaz1skfR/aYJdiCx/q7wfT4D0Zj58fRLi7ItsdY2TT8WNyNGH9nIZlb0NvZVEd8Y7FpHhEIDA66uXKpADbx3faBZwVgmfdO3YVrzvFkDsy08uu80oA=
+                  secure: "rK4wbkFfW3+EKIS8jTjn89gBDjylsXtoqUEQb9IQOpBpaR9hYev5c6s605pgfhToaf+u6fWBwRghxSF9A9IK56KZxgDeoC0K1WOQ1mbvwA01ojMtgjCLfBTrmixkK9SEyFZPN0ZT336c2xrPEOuJnr8PQU1NNiszWTLB2SnHstIJ8o7QWHf938QNcxvvJUrR9DplCykEx5g7t1IsAWkTMR9z/g/o3E4+WGOyWN8BJBm8NimeosGCPf6PDcADfzCqn6Ch4F9GoDDVAj1YitZkfYCz05QMwM1LcFj6Qu4OlhljZzoKrvZJa15cXycUacobdamW+V3FB5o49Klnz7XwdD5dbZYcnsroIJ5SA+Rb/Rq4yJ+vFu+5HBvdwP4Hpg0yyIoWFDmnRegaKvNe66iIQvV78+RBaLUBvvrVNbbQOD0wFflxuT6Jkyyr8qGorxmS3dHBQJcm6mvyCB/G124BY//QQRuWV8k57vZrjVGIEhv+6BlLcfD6QEK61zC4CG6BLiijwtj+CGvCGV3ics/rVg921MIF8e/Y9wk3KWMn+jEXYMhJ4dn1uMuPqGDRfZ2EXIXH0aVuUtPajDSULIvfBBj4iex+PCgnW7A0y4Ri9NtDpYw35E6+bvkXx6nVA2WAnw2C06BtahZgRBprqyI0ham+9eS0oOZohceXzf1VY3E="
