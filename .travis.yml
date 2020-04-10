@@ -1,5 +1,5 @@
-dist: trusty
-sudo: false
+os: linux
+dist: bionic
 
 branches:
     only:
@@ -9,7 +9,6 @@ branches:
 language: python
 
 python:
-    - 3.4
     - 3.5
     - 3.6
     - 3.7
@@ -31,7 +30,7 @@ jobs:
           env: TOXENV=linting
 
         - stage: deploy
-          python: 3.5
+          python: 3.8
           install: skip
           script: skip
           deploy:
@@ -39,6 +38,6 @@ jobs:
               on:
                   branch: master
               distributions: sdist bdist_wheel
-              user: jcgoble3
+              username: jcgoble3
               password:
                   secure: "rK4wbkFfW3+EKIS8jTjn89gBDjylsXtoqUEQb9IQOpBpaR9hYev5c6s605pgfhToaf+u6fWBwRghxSF9A9IK56KZxgDeoC0K1WOQ1mbvwA01ojMtgjCLfBTrmixkK9SEyFZPN0ZT336c2xrPEOuJnr8PQU1NNiszWTLB2SnHstIJ8o7QWHf938QNcxvvJUrR9DplCykEx5g7t1IsAWkTMR9z/g/o3E4+WGOyWN8BJBm8NimeosGCPf6PDcADfzCqn6Ch4F9GoDDVAj1YitZkfYCz05QMwM1LcFj6Qu4OlhljZzoKrvZJa15cXycUacobdamW+V3FB5o49Klnz7XwdD5dbZYcnsroIJ5SA+Rb/Rq4yJ+vFu+5HBvdwP4Hpg0yyIoWFDmnRegaKvNe66iIQvV78+RBaLUBvvrVNbbQOD0wFflxuT6Jkyyr8qGorxmS3dHBQJcm6mvyCB/G124BY//QQRuWV8k57vZrjVGIEhv+6BlLcfD6QEK61zC4CG6BLiijwtj+CGvCGV3ics/rVg921MIF8e/Y9wk3KWMn+jEXYMhJ4dn1uMuPqGDRfZ2EXIXH0aVuUtPajDSULIvfBBj4iex+PCgnW7A0y4Ri9NtDpYw35E6+bvkXx6nVA2WAnw2C06BtahZgRBprqyI0ham+9eS0oOZohceXzf1VY3E="
