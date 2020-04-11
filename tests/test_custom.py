@@ -84,12 +84,3 @@ def test_too_many_captures():
 
 def test_minexpand_fail():
     assert luapatt.find('test', 'te-x') is None
-
-def test_percent_g():
-    checkerror(NotImplementedError, None, luapatt.find, 'test', '%g')
-
-def test_percent_c():
-    checkerror(NotImplementedError, None, luapatt.find, 'test', '%c')
-
-def test_percent_p():
-    checkerror(NotImplementedError, None, luapatt.find, 'test', '%p')

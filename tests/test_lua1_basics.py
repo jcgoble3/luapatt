@@ -162,3 +162,9 @@ def test_right_bracket_in_set():
     assert luapatt.match(']]]áb', '[^]]') == 'á'
 def test_percent_x():
     assert luapatt.match("0alo alo", "%x*") == "0a"
+def test_match_control_characters():
+    assert luapatt.match('alo alo', '%C+') == 'alo alo'
+def test_match_printable():
+    assert luapatt.match('  \n\r*&\n\r   xuxu  \n\n', '%g%g%g+') == 'xuxu'
+def test_match_punctuation():
+    assert luapatt.match('Hello World!', '%p+') == '!'

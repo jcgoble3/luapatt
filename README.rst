@@ -20,12 +20,10 @@ For documentation on how pattern matching works, please read the `Lua
 reference manual`_. This library contains the following differences from
 stock Lua:
 
--  ``%c``, ``%g``, ``%p``, and their negated counterparts are not
-   available; attempting to use them will raise the built-in
-   ``NotImplementedError``.
--  Other character classes that rely on the meaning of a character call
-   Python’s ``str.is*`` family of methods, and so use the Unicode
-   definition of that meaning.
+-  Character classes that rely on the meaning of a character call
+   Python’s ``str.is*`` family of methods or use Python’s ``unicodedata``
+   module for character classification, and so use the Unicode definition
+   of that meaning.
 -  String positions are zero-based instead of one-based, reflecting the
    fact that Python is generally zero-based (as opposed to Lua, which
    has one-based indexes). This affects position captures and the

@@ -19,6 +19,8 @@
 # IN THE SOFTWARE.
 
 from array import array
+from collections.abc import Mapping
+import unicodedata
 
 __version__ = '0.9.0b5'
 
@@ -205,7 +207,7 @@ class _PatternMatcher:
     def subst(self, captures, repl, matchstart, matchend):
         if callable(repl):
             value = repl(*captures)
-        elif type(repl) == dict:
+        elif isinstance(repl, Mapping):
             value = repl.get(captures[0])
         else:
             value = self._subst_str(captures, str(repl), matchstart, matchend)
@@ -443,9 +445,12 @@ class _PatternMatcher:
             match = sc.isdigit() or sc in 'abcdefABCDEF'
         elif pcl == 'z':
             match = sc == '\0'
-        elif pcl in 'cgp':
-            raise NotImplementedError('{0}c, {0}g, and {0}p are not '
-                                      'available'.format(ESCAPE))
+        elif pcl == 'c':
+            match = unicodedata.category(sc)[0] == 'C'
+        elif pcl == 'g':
+            match = unicodedata.category(sc)[0] not in 'CZ'
+        elif pcl == 'p':
+            match = unicodedata.category(sc)[0] == 'P'
         else:
             return sc == pc
         return match if pc.islower() else not match
