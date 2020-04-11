@@ -30,6 +30,7 @@ jobs:
           env: TOXENV=linting
 
         - stage: deploy
+          if: branch = master
           python: 3.8
           install: skip
           script: skip
