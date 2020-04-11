@@ -1,7 +1,7 @@
 luapatt |travis-develop|
 ========================
 
-A Python 3.3+ implementation of the `Lua language’s`_ pattern matching
+A Python 3.5+ implementation of the `Lua language’s`_ pattern matching
 functions. Lua’s pattern matching is simpler than regular expressions
 and lacks several features that regexes have, such as ``|`` for
 alternation, but also contains some features difficult or impossible to
